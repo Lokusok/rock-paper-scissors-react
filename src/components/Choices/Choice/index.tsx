@@ -9,10 +9,9 @@ import { ChoiceEnum } from '../../../types';
 
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import {
-  setChoicePlayer1,
-  setChoicePlayer2,
+  choiceBoth,
+  selectPlayer1Choice,
 } from '../../../redux/slices/game-slice';
-import { getRandomChoice } from '../../../utils/getRandomChoice';
 
 const ChoiceButton = styled(Button)`
   background: transparent;
@@ -34,8 +33,8 @@ interface IChoiceProps {
 
 const Choice: React.FC<IChoiceProps> = ({ value = ChoiceEnum.ROCK }) => {
   const dispatch = useAppDispatch();
-  const player1Val = useAppSelector((state) => state.game.player1.choice);
-  const player2Val = useAppSelector((state) => state.game.player2.choice);
+  const player1Val = useAppSelector(selectPlayer1Choice);
+  const player2Val = useAppSelector(selectPlayer1Choice);
   const disabled = Boolean(player1Val && player2Val);
 
   const Icon = getIcon(value);
@@ -52,8 +51,7 @@ const Choice: React.FC<IChoiceProps> = ({ value = ChoiceEnum.ROCK }) => {
   };
 
   const handleClick = () => {
-    dispatch(setChoicePlayer1(value));
-    dispatch(setChoicePlayer2(getRandomChoice()));
+    dispatch(choiceBoth({ userValue: value }));
   };
 
   const open = Boolean(anchorEl);

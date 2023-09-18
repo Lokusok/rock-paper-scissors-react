@@ -1,9 +1,12 @@
 import React from 'react';
 
-import { IconButton } from '@mui/material';
+import { IconButton, Zoom } from '@mui/material';
 import { styled } from '@mui/system';
 
 import { VscDebugRestart } from 'react-icons/vsc';
+
+import { restartGame, selectIsFinished } from '../../redux/slices/game-slice';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
 
 const RestartButton = styled(IconButton)`
   &:hover svg {
@@ -13,10 +16,19 @@ const RestartButton = styled(IconButton)`
 `;
 
 const Restart: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const isFinished = useAppSelector(selectIsFinished);
+
+  const handleClick = () => {
+    dispatch(restartGame());
+  };
+
   return (
-    <RestartButton color="primary">
-      <VscDebugRestart size={42} />
-    </RestartButton>
+    <Zoom in={isFinished}>
+      <RestartButton onClick={handleClick} color="primary">
+        <VscDebugRestart size={42} />
+      </RestartButton>
+    </Zoom>
   );
 };
 

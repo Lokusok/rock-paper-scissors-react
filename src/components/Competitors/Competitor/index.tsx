@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { FaHandBackFist } from 'react-icons/fa6';
 import { BsQuestionLg } from 'react-icons/bs';
 
 import { Box } from '@mui/material';

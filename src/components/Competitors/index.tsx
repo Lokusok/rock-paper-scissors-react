@@ -4,14 +4,15 @@ import { Grid } from '@mui/material';
 
 import Competitor from './Competitor';
 
-import { ChoiceEnum } from '../../types';
-
-import { useAppSelector, useAppDispatch } from '../../redux/store';
+import { useAppSelector } from '../../redux/store';
+import {
+  selectPlayer1Choice,
+  selectPlayer2Choice,
+} from '../../redux/slices/game-slice';
 
 const Competitors: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const player1Val = useAppSelector((state) => state.game.player1.choice);
-  const player2Val = useAppSelector((state) => state.game.player2.choice);
+  const player1Val = useAppSelector(selectPlayer1Choice);
+  const player2Val = useAppSelector(selectPlayer2Choice);
 
   return (
     <>
